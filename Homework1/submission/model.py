@@ -1,5 +1,5 @@
 import os
-import tensorflow.keras as tfk
+import tensorflow as tf
 
 class model:
     def __init__(self, path):
