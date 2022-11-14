@@ -52,6 +52,10 @@ jobs:
           filename: 'submission.zip'
           directory: 'Homework1/Models/${{ matrix.MODEL }}'
           path: 'ANN_Homework1_Model ../../metadata model.py'
+      # Remove old unzipped model data
+      - name: remove_model
+        if: steps.filter.outputs.submission == 'true' && steps.check_deliverables.outputs.files_exists == 'true'
+        run: rm -rf "Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model"
       # Creates a new commit containing the zip archive and pushes it
       - name: push_zip
         if: steps.filter.outputs.submission == 'true' && steps.check_deliverables.outputs.files_exists == 'true'
