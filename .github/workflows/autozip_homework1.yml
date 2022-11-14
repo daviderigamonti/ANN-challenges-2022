@@ -33,14 +33,15 @@ jobs:
         with:
           filters: |
             submission:
-            - 'Homework1/Models/${{ matrix.MODEL }}/submission/**'
+            - 'Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model/**, Homework1/Models/${{ matrix.MODEL }}/model.py'
       # Checks if all the deliverables exist
       - name: check_deliverables
+        id: check_deliverables
         if: steps.filter.outputs.submission == 'true'
         uses: andstor/file-existence-action@v2
         with:
           ignore_case: false
-          files: "Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model/**, Homework1/Models/${{ matrix.MODEL }}/model.py Homework1/metadata"
+          files: "Homework1/Models/${{ matrix.MODEL }}/model.py, Homework1/metadata, Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model"
       # Creates a zip submission inside the model folder containing all the deliverables
       - name: create_zip
         if: steps.filter.outputs.submission == 'true' && steps.check_deliverables.outputs.files_exists == 'true'
