@@ -1,6 +1,7 @@
 {
-    'MODEL': [
-        'Starting_Model', 
-        'Starting_Model_Rescale'
+    "MODEL": [
+        "Starting_Model", 
+        "Starting_Model_Rescale",
+        "Transfer_VGG16"
     ]
 }
