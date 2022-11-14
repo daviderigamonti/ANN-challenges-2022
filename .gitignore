@@ -1,0 +1,21 @@
+# Python 
+__pycache__/
+*$py.class
+.ipynb_checkpoints
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# pyenv
+.python-version
+
+# VSCode
+.vscode
+
+# RTC
+.jupyter_ystore.db
+
+# Vim
+Session.vim
+Sessionx.vim
