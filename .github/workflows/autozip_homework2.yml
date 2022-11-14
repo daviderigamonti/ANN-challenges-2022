@@ -1,0 +1,30 @@
+name: autozip_homework2
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "Homework2/**"
+jobs:
+  build_change_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: |
+          JSON=$(cat ./.github/matrix_homework2.json)
+          echo "matrix<<EOF" >> $GITHUB_OUTPUT
+          echo "${JSON}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+   
+  homework:
+    needs: build_change_matrix
+    name: Homework2 submissions
+    runs-on: ubuntu-latest 
+    strategy:
+      matrix: ${{ fromJson(needs.build_change_matrix.outputs.matrix) }}
+    steps:
+      - name: submission
+        run: echo "Zipping"

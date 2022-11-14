@@ -1,0 +1,59 @@
+name: autozip_homework1
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "Homework1/**"
+jobs:       
+  build_change_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: |
+          JSON=$(cat ./Homework1/homework1_model_matrix.json)
+          echo "matrix<<EOF" >> $GITHUB_OUTPUT
+          echo "${JSON}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+              
+  homework:
+    needs: build_change_matrix
+    name: Homework1 submissions
+    runs-on: ubuntu-latest 
+    strategy:
+      matrix: ${{ fromJson(needs.build_change_matrix.outputs.matrix )}}
+    steps:
+      - uses: actions/checkout@v3
+      # Changes filter to model folder
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            submission:
+            - 'Homework1/Models/${{ matrix.MODEL }}/submission/**'
+      # Checks if all the deliverables exist
+      - name: check_deliverables
+        if: steps.filter.outputs.submission == 'true'
+        uses: andstor/file-existence-action@v2
+        with:
+          ignore_case: false
+          files: "Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model/**, Homework1/Models/${{ matrix.MODEL }}/model.py Homework1/metadata"
+      # Creates a zip submission inside the model folder containing all the deliverables
+      - name: create_zip
+        if: steps.filter.outputs.submission == 'true' && steps.check_deliverables.outputs.files_exists == 'true'
+        uses: TheDoctor0/zip-release@0.6.2
+        with:
+          type: 'zip'
+          filename: 'submission.zip'
+          directory: 'Homework1/Models/${{ matrix.MODEL }}'
+          path: 'ANN_Homework1_Model ../../metadata model.py'
+      # Creates a new commit containing the zip archive and pushes it
+      - name: push_zip
+        if: steps.filter.outputs.submission == 'true' && steps.check_deliverables.outputs.files_exists == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Added ZIP submission for ${{ matrix.MODEL }}
+          commit_user_name: Autozip Homework1
