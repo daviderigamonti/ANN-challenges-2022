@@ -33,7 +33,8 @@ jobs:
         with:
           filters: |
             submission:
-            - 'Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model/**, Homework1/Models/${{ matrix.MODEL }}/model.py'
+            - 'Homework1/Models/${{ matrix.MODEL }}/ANN_Homework1_Model/**'
+            - 'Homework1/Models/${{ matrix.MODEL }}/model.py'
       # Checks if all the deliverables exist
       - name: check_deliverables
         id: check_deliverables
