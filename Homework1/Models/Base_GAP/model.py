@@ -8,7 +8,7 @@ class model:
 
     def predict(self, X):
 
-        # Preprocessing 
+        # Preprocessing
         X_scaled = X/255
 
         out = self.model.predict(X_scaled)

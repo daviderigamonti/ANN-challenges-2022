@@ -2,6 +2,7 @@
     "MODEL": [
         "Starting_Model", 
         "Starting_Model_Rescale",
-        "Transfer_VGG16"
+        "Transfer_VGG16",
+        "Base_GAP"
     ]
 }
