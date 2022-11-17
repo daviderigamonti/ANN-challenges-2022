@@ -3,6 +3,7 @@
         "Starting_Model", 
         "Starting_Model_Rescale",
         "Transfer_VGG16",
-        "Base_GAP"
+        "Base_GAP",
+	"Normalization_GAP"
     ]
 }
