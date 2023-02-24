@@ -19,7 +19,7 @@ therefore not a lot of care was put into the report designing process.
 - Davide Rigamonti
 - Raul Singh
 
-## Homework 1
+## [Homework 1](https://codalab.lisn.upsaclay.fr/competitions/8522)
 
 In this homework we were required to classify species of plants, which are divided into categories according to the species of the plant to which they belong. Being a classification problem, given an image, the goal is to predict the correct class label.
 
@@ -30,7 +30,7 @@ In this homework we were required to classify species of plants, which are divid
   <tr><td>Top Accuracy Score</td><td>0.9548</td></tr>
 </table>
 
-## Homework 2
+## [Homework 2](https://codalab.lisn.upsaclay.fr/competitions/9056)
 
 In this homework, we were required to correctly classify samples in the multivariate time series format. In other words, since this is a classification problem, the objective is to correctly map the information contained in the features calculated over time to their labels.
 
